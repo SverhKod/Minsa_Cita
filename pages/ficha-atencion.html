@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Ficha de Atención</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm mx-auto bg-white h-[700px] flex flex-col overflow-hidden rounded-xl shadow-md">
+
+    <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
+      <button onclick="window.location.href='tecnico-dashboard.html'" class="flex items-center gap-2 text-blue-900 font-bold text-sm">
+        ← MINSACITA
+      </button>
+      <span>🩺</span>
+    </div>
+
+    <div class="p-6 flex-1 overflow-y-auto">
+      <h1 class="text-xl font-extrabold text-gray-800 mb-1">Ficha de Atención</h1>
+      <p class="text-gray-500 text-sm mb-5">Revise los datos del paciente antes de iniciar la consulta programada.</p>
+
+      <div class="border border-gray-200 rounded-lg p-4 mb-5">
+        <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
+          <div class="bg-gray-100 text-gray-400 rounded-full w-10 h-10 flex items-center justify-center text-xl">👤</div>
+          <div>
+            <p class="text-xs text-gray-400">PACIENTE</p>
+            <p id="nombrePaciente" class="font-bold text-gray-800"></p>
+          </div>
+        </div>
+
+        <div class="space-y-3 border-l-2 border-blue-900 pl-3">
+          <div>
+            <p class="text-xs text-gray-400 tracking-wide">DNI</p>
+            <p id="dniPaciente" class="font-bold text-gray-800"></p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 tracking-wide">EDAD</p>
+            <p id="edadPaciente" class="font-bold text-gray-800"></p>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400 tracking-wide mb-1">MOTIVO DE CONSULTA</p>
+            <p id="motivoPaciente" class="text-sm text-gray-600 bg-gray-50 rounded-md p-3"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <button id="btnRegistrar" onclick="registrarAsistencia()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3">
+          👍 REGISTRAR ASISTENCIA / INICIAR CONSULTA
+        </button>
+        <button onclick="reprogramar()" class="w-full border-2 border-red-500 text-red-600 font-semibold rounded-lg py-3">
+          🗓 REPROGRAMAR CITA POR INASISTENCIA
+        </button>
+        <button onclick="cancelarCita()" class="w-full text-gray-500 font-semibold rounded-lg py-3">
+          ⊗ CANCELAR CITA
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    App.requiereSesion("tecnico", "login-especialista.html");
+
+    const params = new URLSearchParams(window.location.search);
+    const dni = params.get("dni");
+    const paciente = dni ? DB.getPacienteDeColaPorDni(dni) : DB.getColaPacientes()[0];
+
+    if (!paciente) {
+      window.location.href = "tecnico-dashboard.html";
+    } else {
+      document.getElementById("nombrePaciente").textContent = paciente.nombre;
+      document.getElementById("dniPaciente").textContent = paciente.dni;
+      document.getElementById("edadPaciente").textContent = `${paciente.edad || "—"} años`;
+      document.getElementById("motivoPaciente").textContent = paciente.motivo || "Sin motivo registrado.";
+
+      if (paciente.estado === "validado") {
+        const btn = document.getElementById("btnRegistrar");
+        btn.textContent = "✓ ASISTENCIA YA REGISTRADA";
+        btn.disabled = true;
+        btn.classList.remove("bg-blue-900", "hover:bg-blue-800");
+        btn.classList.add("bg-gray-300", "cursor-not-allowed");
+      }
+    }
+
+    function registrarAsistencia() {
+      DB.actualizarPacienteEnCola(paciente.dni, { estado: "validado" });
+      alert("Asistencia registrada. Iniciando consulta médica...");
+      window.location.href = "tecnico-dashboard.html";
+    }
+
+    function reprogramar() {
+      if (confirm("¿Reprogramar esta cita por inasistencia del paciente?")) {
+        DB.actualizarPacienteEnCola(paciente.dni, { estado: "ausente" });
+        window.location.href = "tecnico-dashboard.html";
+      }
+    }
+
+    function cancelarCita() {
+      if (confirm("¿Seguro que desea cancelar esta cita?")) {
+        DB.actualizarPacienteEnCola(paciente.dni, { estado: "cancelada" });
+        window.location.href = "tecnico-dashboard.html";
+      }
+    }
+  </script>
+</body>
+</html>

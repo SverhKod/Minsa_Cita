@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Ayuda</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm bg-white rounded-xl shadow-md overflow-hidden fade-in" style="max-width:384px;margin:0 auto;">
+
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
+      <button onclick="history.back()" class="text-gray-600">←</button>
+      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+    </div>
+
+    <div class="p-6">
+      <h1 class="text-xl font-extrabold text-gray-800 mb-1">Ayuda y Preguntas Frecuentes</h1>
+      <p class="text-gray-500 text-sm mb-5">Encuentre respuestas rápidas sobre el uso del aplicativo MinsaCita, gestione sus atenciones y conozca los canales de soporte del Ministerio de Salud.</p>
+
+      <div class="relative mb-5">
+        <input type="text" placeholder="Busque un tema (ej. Cancelar cita)"
+          class="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+      </div>
+
+      <div class="bg-blue-50 rounded-lg p-4 mb-6 flex gap-3 items-start">
+        <div class="bg-blue-900 text-white rounded-full w-9 h-9 flex items-center justify-center shrink-0">📞</div>
+        <div>
+          <p class="font-bold text-gray-800">Soporte Técnico MINSA</p>
+          <p class="text-xs text-gray-500 mb-3">Orientación médica gratuita, soporte de salud mental e información sobre sus citas. Disponible las 24 horas del día a nivel nacional.</p>
+          <button class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-2 text-sm">Llamar al 113</button>
+        </div>
+      </div>
+
+      <h2 class="font-bold text-gray-800 mb-2">Preguntas Frecuentes</h2>
+      <div id="faqList" class="divide-y divide-gray-100 border-t border-gray-100"></div>
+    </div>
+  </div>
+
+  <script>
+    const faqs = [
+      {
+        q: "¿Cómo programar una nueva cita médica?",
+        a: "Ingrese al Módulo Ciudadano, seleccione 'Agendar' desde el inicio y siga los 5 pasos: sede y especialidad, médico, fecha y hora, y confirmación."
+      },
+      {
+        q: "¿Con cuánto tiempo de anticipación puedo cancelar mi cita?",
+        a: "Puede cancelar su cita hasta 24 horas antes de la hora programada desde la sección 'Mis Citas'."
+      },
+      {
+        q: "¿Qué documentos son obligatorios el día de la atención?",
+        a: "Debe presentar su DNI físico y llegar 30 minutos antes de la hora programada."
+      },
+      {
+        q: "Olvidé mi contraseña, ¿cómo puedo recuperarla?",
+        a: "En la pantalla de inicio de sesión, seleccione '¿Olvidaste tu contraseña?' e ingrese su DNI para recibir un código de verificación por SMS o correo."
+      },
+    ];
+
+    const cont = document.getElementById("faqList");
+    cont.innerHTML = faqs.map((f, i) => `
+      <div class="py-3">
+        <button onclick="toggle(${i})" class="w-full flex items-center justify-between text-left">
+          <span class="text-sm font-medium text-gray-700">${f.q}</span>
+          <span id="icon-${i}" class="text-gray-400">⌄</span>
+        </button>
+        <p id="answer-${i}" class="text-sm text-gray-500 mt-2 hidden">${f.a}</p>
+      </div>
+    `).join("");
+
+    function toggle(i) {
+      const answer = document.getElementById(`answer-${i}`);
+      const icon = document.getElementById(`icon-${i}`);
+      const oculto = answer.classList.contains("hidden");
+      answer.classList.toggle("hidden");
+      icon.textContent = oculto ? "⌃" : "⌄";
+    }
+  </script>
+</body>
+</html>

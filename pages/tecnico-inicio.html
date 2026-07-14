@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Inicio Técnico</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm mx-auto bg-gray-100 h-[700px] flex flex-col overflow-hidden rounded-xl shadow-md">
+
+    <div class="bg-white flex items-center gap-2 px-4 py-3 border-b border-gray-200 shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="h-5 w-5 text-blue-900" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+      </svg>
+      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+
+      <!-- Bienvenida -->
+      <div class="bg-white rounded-lg shadow-sm p-4 flex items-center justify-between">
+        <div>
+          <p class="text-gray-800 font-bold">Bienvenido/a, <span id="nombreTec">Técnico</span></p>
+          <p class="text-gray-400 text-xs mt-1" id="fechaHoy"></p>
+          <p class="text-gray-400 text-xs">📍 Consultorio <span id="consultorioTec"></span></p>
+        </div>
+        <div id="avatar" class="bg-blue-900 text-white rounded-md w-10 h-10 flex items-center justify-center font-bold text-sm shrink-0"></div>
+      </div>
+
+      <!-- Acceso rápido a la cola -->
+      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+        <div class="mx-auto mb-3 bg-blue-50 text-blue-900 rounded-lg w-12 h-12 flex items-center justify-center text-2xl">🗒️</div>
+        <p class="font-bold text-gray-800 mb-4">COLA DE PACIENTES<br>DEL DÍA</p>
+        <button onclick="window.location.href='tecnico-dashboard.html'" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-2.5">
+          Ver Cola de Pacientes
+        </button>
+      </div>
+
+      <!-- Resumen del día -->
+      <div>
+        <h2 class="text-blue-900 font-bold mb-3">Resumen del Día</h2>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <p id="totalPacientes" class="text-2xl font-extrabold text-blue-900">0</p>
+            <p class="text-xs text-gray-400 mt-1">Total</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <p id="totalValidados" class="text-2xl font-extrabold text-green-600">0</p>
+            <p class="text-xs text-gray-400 mt-1">Validados</p>
+          </div>
+          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
+            <p id="totalPendientes" class="text-2xl font-extrabold text-yellow-600">0</p>
+            <p class="text-xs text-gray-400 mt-1">Pendientes</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Próximo paciente -->
+      <div>
+        <h2 class="text-blue-900 font-bold mb-3">Próximo Paciente en Espera</h2>
+        <div id="proximoPaciente"></div>
+      </div>
+
+      <button onclick="App.mostrarSoporte()" class="w-full bg-white shadow-sm rounded-lg p-4 text-center text-sm text-gray-500 flex items-center justify-center gap-1">
+        🎧 Soporte Técnico MINSA
+      </button>
+    </div>
+
+    <!-- Bottom nav -->
+    <div class="bg-blue-900 grid grid-cols-3 text-white text-xs shrink-0">
+      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40"><span>🏠</span>Inicio</button>
+      <button onclick="window.location.href='tecnico-dashboard.html'" class="py-3 flex flex-col items-center gap-1"><span>📊</span>Dashboard</button>
+      <button onclick="window.location.href='perfil-tecnico.html'" class="py-3 flex flex-col items-center gap-1"><span>👤</span>Perfil</button>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    const sesion = App.requiereSesion("tecnico", "login-especialista.html");
+
+    if (sesion) {
+      const tecnico = DB.getTecnicoPorCodigo(sesion.datos.codigo);
+      const nombre = tecnico ? tecnico.nombre : "Técnico";
+
+      document.getElementById("nombreTec").textContent = nombre;
+      document.getElementById("avatar").textContent = App.iniciales(nombre);
+      document.getElementById("consultorioTec").textContent = tecnico ? tecnico.consultorio : "—";
+      document.getElementById("fechaHoy").textContent = App.formatoFechaLarga(new Date());
+
+      const cola = DB.getColaPacientes();
+      const validados = cola.filter((p) => p.estado === "validado");
+      const pendientes = cola.filter((p) => p.estado === "espera");
+
+      document.getElementById("totalPacientes").textContent = cola.length;
+      document.getElementById("totalValidados").textContent = validados.length;
+      document.getElementById("totalPendientes").textContent = pendientes.length;
+
+      const cont = document.getElementById("proximoPaciente");
+      const siguiente = pendientes.sort((a, b) => a.orden - b.orden)[0];
+
+      if (!siguiente) {
+        cont.innerHTML = `<p class="text-gray-400 text-sm bg-white rounded-lg p-4 text-center shadow-sm">No hay pacientes pendientes de validación.</p>`;
+      } else {
+        cont.innerHTML = `
+          <div class="bg-white rounded-lg shadow-sm p-4 cursor-pointer" onclick="window.location.href='ficha-atencion.html?dni=${siguiente.dni}'">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-xs text-gray-400">Hora Asignada</p>
+              <span class="text-xs font-semibold px-2 py-1 rounded-full bg-yellow-100 text-yellow-700">EN ESPERA</span>
+            </div>
+            <p class="font-bold text-blue-900">${String(siguiente.orden).padStart(2,"0")} &nbsp; ${siguiente.hora}</p>
+            <p class="font-semibold text-gray-800">${siguiente.nombre}</p>
+            <p class="text-xs text-gray-400">🆔 DNI: ${siguiente.dni}</p>
+          </div>`;
+      }
+    }
+  </script>
+</body>
+</html>

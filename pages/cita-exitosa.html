@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Cita Reservada</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm bg-white rounded-xl shadow-md overflow-hidden fade-in" style="max-width:384px;margin:0 auto;">
+    <div class="p-8 text-center">
+      <div class="mx-auto mb-5 bg-blue-900 text-white rounded-xl w-16 h-16 flex items-center justify-center text-3xl">✓</div>
+
+      <h1 class="text-xl font-extrabold text-gray-800 mb-2">¡CITA RESERVADA EXITOSAMENTE!</h1>
+      <p class="text-gray-500 text-sm mb-6">Su solicitud ha sido procesada. Por favor, conserve el código de atención para presentar en admisión el día de su cita.</p>
+
+      <div class="bg-gray-50 border border-gray-200 rounded-lg py-4 mb-6">
+        <p class="text-xs text-gray-500 font-semibold mb-1">CÓDIGO DE ATENCIÓN</p>
+        <p id="codigo" class="text-2xl font-mono font-bold text-blue-900"></p>
+      </div>
+
+      <button onclick="descargarTicket()" class="w-full border border-gray-300 text-gray-700 font-semibold rounded-lg py-3 mb-3 flex items-center justify-center gap-2">
+        ⬇ DESCARGAR TICKET (PDF)
+      </button>
+      <button onclick="finalizar()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3">
+        FINALIZAR Y SALIR
+      </button>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script>
+    const wizard = DB.getWizard();
+    document.getElementById("codigo").textContent = wizard.codigoAtencion || "MIN-0000-A";
+
+    function descargarTicket() {
+      const contenido = `MINSACITA - TICKET DE ATENCIÓN\nCódigo: ${wizard.codigoAtencion}\nFecha: ${wizard.fecha}\nHora: ${wizard.hora}\n\n(Simulación: en un proyecto real esto generaría un PDF)`;
+      const blob = new Blob([contenido], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `ticket-${wizard.codigoAtencion || "minsacita"}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function finalizar() {
+      DB.limpiarWizard();
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>

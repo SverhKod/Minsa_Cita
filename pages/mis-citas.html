@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Mis Citas</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm bg-gray-100 rounded-xl shadow-md overflow-hidden fade-in flex flex-col" style="max-width:384px;margin:0 auto;" style="min-height: 640px;">
+
+    <div class="bg-white flex items-center gap-2 px-4 py-3 border-b border-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="h-5 w-5 text-blue-900" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+      </svg>
+      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-4">
+      <h1 class="text-lg font-extrabold text-gray-800 mb-4">Mis Citas</h1>
+      <div id="lista" class="space-y-3"></div>
+    </div>
+
+    <div class="bg-blue-900 grid grid-cols-4 text-white text-xs">
+      <button onclick="window.location.href='dashboard.html'" class="py-3 flex flex-col items-center gap-1"><span>🏠</span>Inicio</button>
+      <button onclick="window.location.href='nueva-cita-paso2.html'" class="py-3 flex flex-col items-center gap-1"><span>➕</span>Nueva Cita</button>
+      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40"><span>🗓️</span>Mis Citas</button>
+      <button onclick="window.location.href='perfil.html'" class="py-3 flex flex-col items-center gap-1"><span>👤</span>Perfil</button>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    const sesion = App.requiereSesion("ciudadano", "login-ciudadano.html");
+    const estadoColor = {
+      confirmada: "bg-green-100 text-green-700",
+      atendida: "bg-blue-100 text-blue-700",
+      reprogramada: "bg-yellow-100 text-yellow-700",
+      pendiente: "bg-gray-100 text-gray-700",
+      cancelada: "bg-red-100 text-red-700",
+    };
+    const estadoLabel = {
+      confirmada: "Confirmada", atendida: "Atendida", reprogramada: "Reprogramada",
+      pendiente: "Pendiente", cancelada: "Cancelada",
+    };
+
+    function render() {
+      const citas = DB.getCitasPorDni(sesion.datos.dni).sort((a,b) => new Date(b.creadoEn) - new Date(a.creadoEn));
+      const cont = document.getElementById("lista");
+      if (citas.length === 0) {
+        cont.innerHTML = `<p class="text-gray-400 text-sm bg-white rounded-lg p-4 text-center">No tienes citas registradas.</p>`;
+        return;
+      }
+      cont.innerHTML = citas.map((c) => {
+        const especialidad = DB.getEspecialidadPorId(c.especialidadId);
+        const sede = DB.getSedePorId(c.sedeId);
+        const medico = DB.getMedicoPorId(c.medicoId);
+        return `
+        <div class="bg-white rounded-lg shadow-sm p-4">
+          <div class="flex items-center justify-between mb-2">
+            <p class="font-bold text-gray-800">${especialidad ? especialidad.nombre : ""}</p>
+            <span class="text-xs font-semibold px-2 py-1 rounded-full ${estadoColor[c.estado] || ""}">${estadoLabel[c.estado] || c.estado}</span>
+          </div>
+          <p class="text-sm text-gray-500">👨‍⚕️ ${medico ? medico.nombre : ""}</p>
+          <p class="text-sm text-gray-500">📅 ${c.fecha}, ${c.hora}</p>
+          <p class="text-sm text-gray-500 mb-3">🏥 ${sede ? sede.nombre : ""}</p>
+          ${
+            c.estado !== "cancelada" && c.estado !== "atendida"
+              ? `<button onclick="cancelarCita('${c.id}')" class="w-full border border-red-300 text-red-600 text-sm font-semibold rounded-lg py-2">Cancelar Cita</button>`
+              : ""
+          }
+        </div>`;
+      }).join("");
+    }
+
+    function cancelarCita(id) {
+      if (confirm("¿Seguro que desea cancelar esta cita?")) {
+        DB.actualizarCita(id, { estado: "cancelada" });
+        render();
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>

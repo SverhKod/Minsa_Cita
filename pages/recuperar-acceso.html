@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Recuperar Acceso</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm bg-white rounded-xl shadow-md overflow-hidden fade-in" style="max-width:384px;margin:0 auto;">
+
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200">
+      <button onclick="window.location.href='login-ciudadano.html'" class="text-gray-600">←</button>
+      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+    </div>
+
+    <div class="p-6">
+      <h1 class="text-xl font-extrabold text-gray-800 text-center mb-1">Recuperar Acceso</h1>
+      <p class="text-gray-500 text-sm text-center mb-6">Ingrese su documento de identidad y seleccione cómo desea recibir el código de verificación.</p>
+
+      <form id="formRecuperar" class="space-y-5">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-1">Número de DNI</label>
+          <input id="dni" type="text" maxlength="8" placeholder="Ej: 12345678"
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800">
+        </div>
+
+        <div>
+          <p class="text-sm font-semibold text-gray-700 mb-2">Método de envío</p>
+          <label class="flex items-center gap-3 border border-gray-200 rounded-lg p-3 mb-2 cursor-pointer">
+            <input type="radio" name="metodo" value="sms" checked class="text-blue-900">
+            <span class="text-lg">💬</span>
+            <span class="text-sm text-gray-700">Mensaje de Texto (SMS)<br><span class="text-xs text-gray-400">Al celular registrado terminado en **45</span></span>
+          </label>
+          <label class="flex items-center gap-3 border border-gray-200 rounded-lg p-3 cursor-pointer">
+            <input type="radio" name="metodo" value="correo" class="text-blue-900">
+            <span class="text-lg">✉️</span>
+            <span class="text-sm text-gray-700">Correo Electrónico<br><span class="text-xs text-gray-400">A j***@gmail.com</span></span>
+          </label>
+        </div>
+
+        <p id="mensaje" class="text-sm hidden"></p>
+
+        <button type="submit" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3">
+          Enviar Código
+        </button>
+        <button type="button" onclick="window.location.href='login-ciudadano.html'" class="w-full border border-gray-300 text-gray-700 font-semibold rounded-lg py-3">
+          Cancelar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script>
+    document.getElementById("formRecuperar").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const dni = document.getElementById("dni").value.trim();
+      const mensaje = document.getElementById("mensaje");
+
+      if (!dni) {
+        mensaje.textContent = "Ingrese su número de DNI.";
+        mensaje.className = "text-sm text-red-600";
+        mensaje.classList.remove("hidden");
+        return;
+      }
+
+      const metodo = document.querySelector('input[name="metodo"]:checked').value;
+      mensaje.textContent = `Código de verificación enviado por ${metodo === "sms" ? "SMS" : "correo electrónico"} (simulación). Revise su bandeja de entrada.`;
+      mensaje.className = "text-sm text-green-700";
+      mensaje.classList.remove("hidden");
+
+      DB.resetIntentos();
+
+      setTimeout(() => {
+        window.location.href = "login-ciudadano.html";
+      }, 2500);
+    });
+  </script>
+</body>
+</html>

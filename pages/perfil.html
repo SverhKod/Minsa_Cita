@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MinsaCita - Perfil</title>
+<link rel="stylesheet" href="../css/tailwind.css">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-sm bg-gray-100 rounded-xl shadow-md overflow-hidden fade-in flex flex-col" style="max-width:384px;margin:0 auto;" style="min-height: 640px;">
+
+    <div class="bg-white flex items-center gap-2 px-4 py-3 border-b border-gray-200">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="h-5 w-5 text-blue-900" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
+      </svg>
+      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+        <div id="avatar" class="mx-auto mb-3 bg-blue-900 text-white rounded-full w-16 h-16 flex items-center justify-center font-bold text-xl"></div>
+        <p id="nombre" class="font-bold text-gray-800 text-lg"></p>
+        <p id="dni" class="text-gray-400 text-sm"></p>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-sm divide-y divide-gray-100">
+        <div class="p-4">
+          <p class="text-xs text-gray-400">Correo Electrónico</p>
+          <p id="correo" class="text-gray-800 font-medium"></p>
+        </div>
+        <div class="p-4">
+          <p class="text-xs text-gray-400">Teléfono</p>
+          <p id="telefono" class="text-gray-800 font-medium"></p>
+        </div>
+      </div>
+
+      <button onclick="window.location.href='ayuda.html'" class="w-full bg-white shadow-sm rounded-lg p-4 text-left flex items-center justify-between">
+        <span class="font-semibold text-gray-700">Ayuda y Preguntas Frecuentes</span><span>›</span>
+      </button>
+
+      <button onclick="cerrarSesion()" class="w-full border border-red-300 text-red-600 font-semibold rounded-lg py-3">
+        Cerrar Sesión
+      </button>
+    </div>
+
+    <div class="bg-blue-900 grid grid-cols-4 text-white text-xs">
+      <button onclick="window.location.href='dashboard.html'" class="py-3 flex flex-col items-center gap-1"><span>🏠</span>Inicio</button>
+      <button onclick="window.location.href='nueva-cita-paso2.html'" class="py-3 flex flex-col items-center gap-1"><span>➕</span>Nueva Cita</button>
+      <button onclick="window.location.href='mis-citas.html'" class="py-3 flex flex-col items-center gap-1"><span>🗓️</span>Mis Citas</button>
+      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40"><span>👤</span>Perfil</button>
+    </div>
+  </div>
+
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    const sesion = App.requiereSesion("ciudadano", "login-ciudadano.html");
+    if (sesion) {
+      const usuario = DB.getUsuarioPorDni(sesion.datos.dni) || { nombre: "Ciudadano", dni: sesion.datos.dni };
+      document.getElementById("avatar").textContent = App.iniciales(usuario.nombre || "MC");
+      document.getElementById("nombre").textContent = usuario.nombre;
+      document.getElementById("dni").textContent = "DNI: " + usuario.dni;
+      document.getElementById("correo").textContent = usuario.correo || "No registrado";
+      document.getElementById("telefono").textContent = usuario.telefono || "No registrado";
+    }
+
+    function cerrarSesion() {
+      App.cerrarSesion("../index.html");
+    }
+  </script>
+</body>
+</html>
