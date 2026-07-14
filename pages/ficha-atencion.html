@@ -4,59 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MinsaCita - Ficha de Atención</title>
-<link rel="stylesheet" href="../css/tailwind.css">
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center md:p-6">
 
-  <div class="w-full max-w-sm mx-auto bg-white h-[700px] flex flex-col overflow-hidden rounded-xl shadow-md">
+  <div class="w-full max-w-md md:max-w-3xl mx-auto bg-white min-h-screen md:min-h-[80vh] md:rounded-xl md:shadow-2xl overflow-hidden fade-in flex flex-col transition-all duration-300">
 
-    <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200 shrink-0">
-      <button onclick="window.location.href='tecnico-dashboard.html'" class="flex items-center gap-2 text-blue-900 font-bold text-sm">
-        ← MINSACITA
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 shrink-0">
+      <button onclick="window.location.href='tecnico-dashboard.html'" class="flex items-center gap-2 text-blue-900 font-bold text-sm hover:text-blue-700 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        MINSACITA
       </button>
-      <span>🩺</span>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-900">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
     </div>
 
-    <div class="p-6 flex-1 overflow-y-auto">
-      <h1 class="text-xl font-extrabold text-gray-800 mb-1">Ficha de Atención</h1>
-      <p class="text-gray-500 text-sm mb-5">Revise los datos del paciente antes de iniciar la consulta programada.</p>
+    <div class="p-6 md:p-10 flex-1 overflow-y-auto">
+      <div class="max-w-2xl mx-auto w-full">
+        <h1 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-1">Ficha de Atención</h1>
+        <p class="text-gray-500 text-sm mb-5">Revise los datos del paciente antes de iniciar la consulta programada.</p>
 
-      <div class="border border-gray-200 rounded-lg p-4 mb-5">
-        <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
-          <div class="bg-gray-100 text-gray-400 rounded-full w-10 h-10 flex items-center justify-center text-xl">👤</div>
-          <div>
-            <p class="text-xs text-gray-400">PACIENTE</p>
-            <p id="nombrePaciente" class="font-bold text-gray-800"></p>
+        <div class="border border-gray-200 rounded-lg p-4 md:p-6 mb-5">
+          <div class="flex items-center gap-3 mb-4 pb-4 border-b border-gray-100">
+            <div class="bg-gray-100 text-gray-400 rounded-full w-10 h-10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400">PACIENTE</p>
+              <p id="nombrePaciente" class="font-bold text-gray-800"></p>
+            </div>
+          </div>
+
+          <div class="space-y-3 border-l-2 border-blue-900 pl-3">
+            <div>
+              <p class="text-xs text-gray-400 tracking-wide">DNI</p>
+              <p id="dniPaciente" class="font-bold text-gray-800"></p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 tracking-wide">EDAD</p>
+              <p id="edadPaciente" class="font-bold text-gray-800"></p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-400 tracking-wide mb-1">MOTIVO DE CONSULTA</p>
+              <p id="motivoPaciente" class="text-sm text-gray-600 bg-gray-50 rounded-md p-3"></p>
+            </div>
           </div>
         </div>
 
-        <div class="space-y-3 border-l-2 border-blue-900 pl-3">
-          <div>
-            <p class="text-xs text-gray-400 tracking-wide">DNI</p>
-            <p id="dniPaciente" class="font-bold text-gray-800"></p>
-          </div>
-          <div>
-            <p class="text-xs text-gray-400 tracking-wide">EDAD</p>
-            <p id="edadPaciente" class="font-bold text-gray-800"></p>
-          </div>
-          <div>
-            <p class="text-xs text-gray-400 tracking-wide mb-1">MOTIVO DE CONSULTA</p>
-            <p id="motivoPaciente" class="text-sm text-gray-600 bg-gray-50 rounded-md p-3"></p>
-          </div>
+        <div class="space-y-3">
+          <button id="btnRegistrar" onclick="registrarAsistencia()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3 transition-colors hover:shadow-md flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            REGISTRAR ASISTENCIA / INICIAR CONSULTA
+          </button>
+          <button onclick="reprogramar()" class="w-full border-2 border-red-500 text-red-600 font-semibold rounded-lg py-3 hover:bg-red-50 transition-colors flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+            REPROGRAMAR CITA POR INASISTENCIA
+          </button>
+          <button onclick="cancelarCita()" class="w-full text-gray-500 font-semibold rounded-lg py-3 hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            CANCELAR CITA
+          </button>
         </div>
-      </div>
-
-      <div class="space-y-3">
-        <button id="btnRegistrar" onclick="registrarAsistencia()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3">
-          👍 REGISTRAR ASISTENCIA / INICIAR CONSULTA
-        </button>
-        <button onclick="reprogramar()" class="w-full border-2 border-red-500 text-red-600 font-semibold rounded-lg py-3">
-          🗓 REPROGRAMAR CITA POR INASISTENCIA
-        </button>
-        <button onclick="cancelarCita()" class="w-full text-gray-500 font-semibold rounded-lg py-3">
-          ⊗ CANCELAR CITA
-        </button>
       </div>
     </div>
   </div>
@@ -80,7 +100,7 @@
 
       if (paciente.estado === "validado") {
         const btn = document.getElementById("btnRegistrar");
-        btn.textContent = "✓ ASISTENCIA YA REGISTRADA";
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg> ASISTENCIA YA REGISTRADA`;
         btn.disabled = true;
         btn.classList.remove("bg-blue-900", "hover:bg-blue-800");
         btn.classList.add("bg-gray-300", "cursor-not-allowed");

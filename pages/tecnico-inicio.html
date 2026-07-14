@@ -4,76 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MinsaCita - Inicio Técnico</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
 <link rel="stylesheet" href="../css/tailwind.css">
 <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center md:p-6">
 
-  <div class="w-full max-w-sm mx-auto bg-gray-100 h-[700px] flex flex-col overflow-hidden rounded-xl shadow-md">
+  <div class="w-full max-w-md md:max-w-5xl mx-auto bg-gray-100 md:rounded-xl shadow-md overflow-hidden fade-in flex flex-col min-h-screen md:min-h-[80vh] transition-all">
 
-    <div class="bg-white flex items-center gap-2 px-4 py-3 border-b border-gray-200 shrink-0">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="h-5 w-5 text-blue-900" viewBox="0 0 24 24" fill="currentColor">
+    <div class="bg-white flex items-center gap-2 px-6 py-4 border-b border-gray-200 shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="text-blue-900" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
       </svg>
-      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+      <span class="text-base font-bold text-blue-900 tracking-wide">MINSACITA TÉCNICO</span>
     </div>
 
-    <div class="flex-1 overflow-y-auto p-4 space-y-4">
+    <div class="flex-1 overflow-y-auto p-4 md:p-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-      <!-- Bienvenida -->
-      <div class="bg-white rounded-lg shadow-sm p-4 flex items-center justify-between">
-        <div>
-          <p class="text-gray-800 font-bold">Bienvenido/a, <span id="nombreTec">Técnico</span></p>
-          <p class="text-gray-400 text-xs mt-1" id="fechaHoy"></p>
-          <p class="text-gray-400 text-xs">📍 Consultorio <span id="consultorioTec"></span></p>
+        <div class="md:col-span-1 space-y-6">
+          
+          <div class="bg-white rounded-xl shadow-sm p-5 flex items-center justify-between border border-gray-100 hover:shadow-md transition-shadow">
+            <div>
+              <p class="text-gray-800 font-bold text-lg">Bienvenido/a, <br><span id="nombreTec" class="text-blue-900">Técnico</span></p>
+              <p class="text-gray-400 text-sm mt-1" id="fechaHoy"></p>
+              <p class="text-gray-500 text-sm flex items-center gap-1 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                Consultorio <span id="consultorioTec" class="font-semibold"></span>
+              </p>
+            </div>
+            <div id="avatar" class="bg-blue-900 text-white rounded-lg w-12 h-12 flex items-center justify-center font-bold text-lg shadow-sm shrink-0"></div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-sm p-6 text-center border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="mx-auto mb-4 bg-blue-50 text-blue-900 rounded-full w-16 h-16 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75v-.008z" />
+              </svg>
+            </div>
+            <p class="font-bold text-gray-800 mb-5 text-lg leading-tight">COLA DE PACIENTES<br>DEL DÍA</p>
+            <button onclick="window.location.href='tecnico-dashboard.html'" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3 transition-colors shadow-md">
+              Ver Cola de Pacientes
+            </button>
+          </div>
+
+          <button onclick="App.mostrarSoporte()" class="w-full bg-white shadow-sm border border-gray-100 rounded-xl p-4 text-center text-sm text-gray-500 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.436 3 11.998c0 4.557 4.03 8.252 9 8.252zm0 0c1.786 0 3.443-.538 4.81-1.455M12 20.25v-3.75m0 3.75A9.92 9.92 0 017.19 18.8m4.81 1.45V16.5m0-4.5c.828 0 1.5.672 1.5 1.5M12 12c-.828 0-1.5.672-1.5 1.5" />
+            </svg>
+            Soporte Técnico MINSA
+          </button>
+
         </div>
-        <div id="avatar" class="bg-blue-900 text-white rounded-md w-10 h-10 flex items-center justify-center font-bold text-sm shrink-0"></div>
-      </div>
 
-      <!-- Acceso rápido a la cola -->
-      <div class="bg-white rounded-lg shadow-sm p-6 text-center">
-        <div class="mx-auto mb-3 bg-blue-50 text-blue-900 rounded-lg w-12 h-12 flex items-center justify-center text-2xl">🗒️</div>
-        <p class="font-bold text-gray-800 mb-4">COLA DE PACIENTES<br>DEL DÍA</p>
-        <button onclick="window.location.href='tecnico-dashboard.html'" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-2.5">
-          Ver Cola de Pacientes
-        </button>
-      </div>
+        <div class="md:col-span-2 space-y-6">
+          
+          <div>
+            <h2 class="text-blue-900 font-bold mb-4 text-lg">Resumen del Día</h2>
+            <div class="grid grid-cols-3 gap-3 md:gap-4">
+              <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 text-center hover:shadow-md transition-shadow">
+                <p id="totalPacientes" class="text-3xl font-extrabold text-blue-900">0</p>
+                <p class="text-xs md:text-sm text-gray-400 mt-2 font-medium uppercase tracking-wide">Total</p>
+              </div>
+              <div class="bg-white rounded-xl shadow-sm border border-green-100 p-5 text-center hover:shadow-md transition-shadow">
+                <p id="totalValidados" class="text-3xl font-extrabold text-green-600">0</p>
+                <p class="text-xs md:text-sm text-gray-400 mt-2 font-medium uppercase tracking-wide">Validados</p>
+              </div>
+              <div class="bg-white rounded-xl shadow-sm border border-yellow-100 p-5 text-center hover:shadow-md transition-shadow">
+                <p id="totalPendientes" class="text-3xl font-extrabold text-yellow-600">0</p>
+                <p class="text-xs md:text-sm text-gray-400 mt-2 font-medium uppercase tracking-wide">Pendientes</p>
+              </div>
+            </div>
+          </div>
 
-      <!-- Resumen del día -->
-      <div>
-        <h2 class="text-blue-900 font-bold mb-3">Resumen del Día</h2>
-        <div class="grid grid-cols-3 gap-3">
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <p id="totalPacientes" class="text-2xl font-extrabold text-blue-900">0</p>
-            <p class="text-xs text-gray-400 mt-1">Total</p>
+          <div>
+            <h2 class="text-blue-900 font-bold mb-4 text-lg">Próximo Paciente en Espera</h2>
+            <div id="proximoPaciente"></div>
           </div>
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <p id="totalValidados" class="text-2xl font-extrabold text-green-600">0</p>
-            <p class="text-xs text-gray-400 mt-1">Validados</p>
-          </div>
-          <div class="bg-white rounded-lg shadow-sm p-4 text-center">
-            <p id="totalPendientes" class="text-2xl font-extrabold text-yellow-600">0</p>
-            <p class="text-xs text-gray-400 mt-1">Pendientes</p>
-          </div>
+
         </div>
-      </div>
 
-      <!-- Próximo paciente -->
-      <div>
-        <h2 class="text-blue-900 font-bold mb-3">Próximo Paciente en Espera</h2>
-        <div id="proximoPaciente"></div>
       </div>
+    </div>
 
-      <button onclick="App.mostrarSoporte()" class="w-full bg-white shadow-sm rounded-lg p-4 text-center text-sm text-gray-500 flex items-center justify-center gap-1">
-        🎧 Soporte Técnico MINSA
+    <div class="bg-blue-900 grid grid-cols-3 text-white text-xs md:text-sm shrink-0">
+      
+      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Inicio
       </button>
-    </div>
 
-    <!-- Bottom nav -->
-    <div class="bg-blue-900 grid grid-cols-3 text-white text-xs shrink-0">
-      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40"><span>🏠</span>Inicio</button>
-      <button onclick="window.location.href='tecnico-dashboard.html'" class="py-3 flex flex-col items-center gap-1"><span>📊</span>Dashboard</button>
-      <button onclick="window.location.href='perfil-tecnico.html'" class="py-3 flex flex-col items-center gap-1"><span>👤</span>Perfil</button>
+      <button onclick="window.location.href='tecnico-dashboard.html'" class="py-3 flex flex-col items-center gap-1 hover:bg-blue-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+        </svg>
+        Dashboard
+      </button>
+
+      <button onclick="window.location.href='perfil-tecnico.html'" class="py-3 flex flex-col items-center gap-1 hover:bg-blue-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+        </svg>
+        Perfil
+      </button>
+
     </div>
   </div>
 
@@ -103,17 +144,29 @@
       const siguiente = pendientes.sort((a, b) => a.orden - b.orden)[0];
 
       if (!siguiente) {
-        cont.innerHTML = `<p class="text-gray-400 text-sm bg-white rounded-lg p-4 text-center shadow-sm">No hay pacientes pendientes de validación.</p>`;
+        cont.innerHTML = `<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center hover:shadow-md transition-shadow"><p class="text-gray-500">No hay pacientes pendientes de validación.</p></div>`;
       } else {
         cont.innerHTML = `
-          <div class="bg-white rounded-lg shadow-sm p-4 cursor-pointer" onclick="window.location.href='ficha-atencion.html?dni=${siguiente.dni}'">
-            <div class="flex items-center justify-between mb-1">
-              <p class="text-xs text-gray-400">Hora Asignada</p>
-              <span class="text-xs font-semibold px-2 py-1 rounded-full bg-yellow-100 text-yellow-700">EN ESPERA</span>
+          <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 cursor-pointer hover:shadow-md hover:border-blue-200 transition-all" onclick="window.location.href='ficha-atencion.html?dni=${siguiente.dni}'">
+            <div class="flex items-center justify-between mb-3 border-b border-gray-50 pb-3">
+              <p class="text-xs text-gray-400 font-medium uppercase tracking-wide">Hora Asignada</p>
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-md border bg-yellow-100 text-yellow-700 border-yellow-200">EN ESPERA</span>
             </div>
-            <p class="font-bold text-blue-900">${String(siguiente.orden).padStart(2,"0")} &nbsp; ${siguiente.hora}</p>
-            <p class="font-semibold text-gray-800">${siguiente.nombre}</p>
-            <p class="text-xs text-gray-400">🆔 DNI: ${siguiente.dni}</p>
+            <div class="flex items-center gap-4 mb-2">
+              <div class="bg-blue-50 text-blue-900 font-bold text-xl rounded-lg w-12 h-12 flex items-center justify-center shrink-0">
+                ${String(siguiente.orden).padStart(2,"0")}
+              </div>
+              <div>
+                <p class="font-bold text-blue-900 text-lg">${siguiente.hora}</p>
+                <p class="font-semibold text-gray-800">${siguiente.nombre}</p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 flex items-center gap-1 mt-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
+              </svg>
+              DNI: ${siguiente.dni}
+            </p>
           </div>`;
       }
     }

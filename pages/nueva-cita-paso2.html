@@ -4,65 +4,85 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MinsaCita - Sede y Especialidad</title>
-<link rel="stylesheet" href="../css/tailwind.css">
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center md:p-6">
 
-  <div class="w-full max-w-sm bg-white rounded-xl shadow-md overflow-hidden fade-in" style="max-width:384px;margin:0 auto;">
+  <div class="w-full max-w-md md:max-w-2xl mx-auto bg-white min-h-screen md:min-h-[80vh] md:rounded-xl md:shadow-2xl overflow-hidden fade-in flex flex-col transition-all duration-300">
 
-    <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
-      <button onclick="window.location.href='dashboard.html'" class="text-blue-900">📋</button>
-      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
-      <button onclick="window.location.href='dashboard.html'" class="text-gray-500 text-xl leading-none">×</button>
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 shrink-0">
+      <div class="flex items-center gap-2">
+        <button onclick="window.location.href='dashboard.html'" class="text-blue-900 hover:text-blue-700 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75v-.008z" />
+          </svg>
+        </button>
+        <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+      </div>
+      <button onclick="window.location.href='dashboard.html'" class="text-gray-500 hover:text-gray-700 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
     </div>
 
-    <div class="p-6">
-      <!-- Steps -->
-      <div class="flex items-center gap-1 mb-6 text-xs">
-        <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center">✓</span>
-        <span class="flex-1 h-0.5 bg-blue-900"></span>
-        <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center">2</span>
-        <span class="flex-1 h-0.5 bg-gray-200"></span>
-        <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">3</span>
-        <span class="flex-1 h-0.5 bg-gray-200"></span>
-        <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">4</span>
-        <span class="flex-1 h-0.5 bg-gray-200"></span>
-        <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">5</span>
-      </div>
-
-      <h1 class="text-xl font-extrabold text-gray-800 mb-1">Selección de Sede y Especialidad</h1>
-      <p class="text-gray-500 text-sm mb-6">Por favor, elija el establecimiento de salud y la especialidad médica requerida para continuar con su cita.</p>
-
-      <div class="space-y-5">
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1">Seleccionar Sede / Establecimiento del MINSA</label>
-          <select id="selectSede" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800">
-            <option value="">Elija un establecimiento</option>
-          </select>
+    <div class="p-6 md:p-10 flex-1 overflow-y-auto">
+      <div class="max-w-lg mx-auto w-full">
+        <!-- Steps -->
+        <div class="flex items-center gap-1 mb-6 text-xs">
+          <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+          </span>
+          <span class="flex-1 h-0.5 bg-blue-900"></span>
+          <span class="w-6 h-6 rounded-full bg-blue-900 text-white flex items-center justify-center">2</span>
+          <span class="flex-1 h-0.5 bg-gray-200"></span>
+          <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">3</span>
+          <span class="flex-1 h-0.5 bg-gray-200"></span>
+          <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">4</span>
+          <span class="flex-1 h-0.5 bg-gray-200"></span>
+          <span class="w-6 h-6 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center">5</span>
         </div>
 
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1">Seleccionar Especialidad Médica</label>
-          <select id="selectEspecialidad" disabled class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800 disabled:bg-gray-100">
-            <option value="">Primero seleccione una sede</option>
-          </select>
-          <p class="text-xs text-gray-400 mt-1">Las especialidades disponibles dependen de la sede seleccionada.</p>
+        <h1 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-1">Selección de Sede y Especialidad</h1>
+        <p class="text-gray-500 text-sm mb-6">Por favor, elija el establecimiento de salud y la especialidad médica requerida para continuar con su cita.</p>
+
+        <div class="space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Seleccionar Sede / Establecimiento del MINSA</label>
+            <select id="selectSede" class="w-full border border-gray-300 rounded-lg px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800 transition-all">
+              <option value="">Elija un establecimiento</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Seleccionar Especialidad Médica</label>
+            <select id="selectEspecialidad" disabled class="w-full border border-gray-300 rounded-lg px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-800 disabled:bg-gray-100 transition-all">
+              <option value="">Primero seleccione una sede</option>
+            </select>
+            <p class="text-xs text-gray-400 mt-1">Las especialidades disponibles dependen de la sede seleccionada.</p>
+          </div>
+
+          <p id="errorMsg" class="text-sm text-red-600 hidden"></p>
+
+          <button id="btnSiguiente" onclick="siguiente()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3 flex items-center justify-center gap-2 transition-colors hover:shadow-md">
+            Siguiente
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
+          <button onclick="window.location.href='dashboard.html'" class="w-full text-gray-600 font-semibold rounded-lg py-3 border border-gray-200 hover:bg-gray-50 transition-colors">
+            Volver
+          </button>
         </div>
 
-        <p id="errorMsg" class="text-sm text-red-600 hidden"></p>
-
-        <button id="btnSiguiente" onclick="siguiente()" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold rounded-lg py-3 flex items-center justify-center gap-2">
-          Siguiente →
-        </button>
-        <button onclick="window.location.href='dashboard.html'" class="w-full text-gray-600 font-semibold rounded-lg py-3 border border-gray-200">
-          Volver
+        <button onclick="App.mostrarSoporte()" class="w-full text-center text-xs text-gray-400 mt-6 flex items-center justify-center gap-1 hover:text-blue-900 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.436 3 11.998c0 4.557 4.03 8.252 9 8.252zm0 0c1.786 0 3.443-.538 4.81-1.455M12 20.25v-3.75m0 3.75A9.92 9.92 0 017.19 18.8m4.81 1.45V16.5m0-4.5c.828 0 1.5.672 1.5 1.5M12 12c-.828 0-1.5.672-1.5 1.5" />
+          </svg>
+          Soporte Técnico MINSA
         </button>
       </div>
-
-      <button onclick="App.mostrarSoporte()" class="w-full text-center text-xs text-gray-400 mt-6 flex items-center justify-center gap-1 hover:text-blue-900">
-        🎧 Soporte Técnico MINSA
-      </button>
     </div>
   </div>
 

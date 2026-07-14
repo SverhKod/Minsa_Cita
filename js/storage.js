@@ -276,7 +276,7 @@ const DB = (() => {
     const intentos = getIntentos();
     intentos.fallidos += 1;
     if (intentos.fallidos >= 3) {
-      intentos.bloqueadoHasta = Date.now() + 15 * 60 * 1000; // 15 min
+      intentos.bloqueadoHasta = Date.now() + 1 * 60 * 1000;
     }
     _set(KEYS.INTENTOS, intentos);
     return intentos;

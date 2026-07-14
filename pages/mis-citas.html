@@ -4,30 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MinsaCita - Mis Citas</title>
+
+<!-- CDN de Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
 <link rel="stylesheet" href="../css/tailwind.css">
 <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center md:p-6">
 
-  <div class="w-full max-w-sm bg-gray-100 rounded-xl shadow-md overflow-hidden fade-in flex flex-col" style="max-width:384px;margin:0 auto;" style="min-height: 640px;">
+  <!-- Contenedor Principal Responsivo -->
+  <div class="w-full max-w-md md:max-w-5xl bg-gray-100 md:rounded-xl shadow-md overflow-hidden fade-in flex flex-col min-h-screen md:min-h-[80vh] transition-all">
 
-    <div class="bg-white flex items-center gap-2 px-4 py-3 border-b border-gray-200">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="h-5 w-5 text-blue-900" viewBox="0 0 24 24" fill="currentColor">
+    <!-- Encabezado -->
+    <div class="bg-white flex items-center gap-2 px-6 py-4 border-b border-gray-200 shrink-0">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="text-blue-900" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2L4 5v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V5l-8-3z"/>
       </svg>
-      <span class="text-sm font-bold text-blue-900 tracking-wide">MINSACITA</span>
+      <span class="text-base font-bold text-blue-900 tracking-wide">MINSACITA</span>
     </div>
 
-    <div class="flex-1 overflow-y-auto p-4">
-      <h1 class="text-lg font-extrabold text-gray-800 mb-4">Mis Citas</h1>
-      <div id="lista" class="space-y-3"></div>
+    <!-- Contenido -->
+    <div class="flex-1 overflow-y-auto p-4 md:p-8">
+      <h1 class="text-xl md:text-2xl font-extrabold text-gray-800 mb-6">Mis Citas</h1>
+      
+      <!-- Lista de citas: 1 columna en móvil, 2 en tablets, 3 en pantallas grandes -->
+      <div id="lista" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
     </div>
 
-    <div class="bg-blue-900 grid grid-cols-4 text-white text-xs">
-      <button onclick="window.location.href='dashboard.html'" class="py-3 flex flex-col items-center gap-1"><span>🏠</span>Inicio</button>
-      <button onclick="window.location.href='nueva-cita-paso2.html'" class="py-3 flex flex-col items-center gap-1"><span>➕</span>Nueva Cita</button>
-      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40"><span>🗓️</span>Mis Citas</button>
-      <button onclick="window.location.href='perfil.html'" class="py-3 flex flex-col items-center gap-1"><span>👤</span>Perfil</button>
+    <!-- Navegación Inferior con SVGs -->
+    <div class="bg-blue-900 grid grid-cols-4 text-white text-xs md:text-sm shrink-0">
+      
+      <!-- Inicio -->
+      <button onclick="window.location.href='dashboard.html'" class="py-3 flex flex-col items-center gap-1 hover:bg-blue-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Inicio
+      </button>
+
+      <!-- Nueva Cita -->
+      <button onclick="window.location.href='nueva-cita-paso2.html'" class="py-3 flex flex-col items-center gap-1 hover:bg-blue-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+        Nueva Cita
+      </button>
+
+      <!-- Mis Citas (Activo) -->
+      <button class="py-3 flex flex-col items-center gap-1 bg-blue-950/40">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+        </svg>
+        Mis Citas
+      </button>
+
+      <!-- Perfil -->
+      <button onclick="window.location.href='perfil.html'" class="py-3 flex flex-col items-center gap-1 hover:bg-blue-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+        </svg>
+        Perfil
+      </button>
+
     </div>
   </div>
 
@@ -36,40 +75,51 @@
   <script>
     const sesion = App.requiereSesion("ciudadano", "login-ciudadano.html");
     const estadoColor = {
-      confirmada: "bg-green-100 text-green-700",
-      atendida: "bg-blue-100 text-blue-700",
-      reprogramada: "bg-yellow-100 text-yellow-700",
-      pendiente: "bg-gray-100 text-gray-700",
-      cancelada: "bg-red-100 text-red-700",
+      confirmada: "bg-green-100 text-green-800 border-green-200",
+      atendida: "bg-blue-100 text-blue-800 border-blue-200",
+      reprogramada: "bg-yellow-100 text-yellow-800 border-yellow-200",
+      pendiente: "bg-gray-100 text-gray-800 border-gray-200",
+      cancelada: "bg-red-100 text-red-800 border-red-200",
     };
     const estadoLabel = {
       confirmada: "Confirmada", atendida: "Atendida", reprogramada: "Reprogramada",
       pendiente: "Pendiente", cancelada: "Cancelada",
     };
 
+    // SVGs para las tarjetas
+    const iconMedico = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400 shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>`;
+    const iconFecha = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400 shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>`;
+    const iconSede = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400 shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" /></svg>`;
+
     function render() {
       const citas = DB.getCitasPorDni(sesion.datos.dni).sort((a,b) => new Date(b.creadoEn) - new Date(a.creadoEn));
       const cont = document.getElementById("lista");
+      
       if (citas.length === 0) {
-        cont.innerHTML = `<p class="text-gray-400 text-sm bg-white rounded-lg p-4 text-center">No tienes citas registradas.</p>`;
+        cont.innerHTML = `<div class="col-span-full bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center"><p class="text-gray-500">No tienes citas registradas.</p></div>`;
         return;
       }
+      
       cont.innerHTML = citas.map((c) => {
         const especialidad = DB.getEspecialidadPorId(c.especialidadId);
         const sede = DB.getSedePorId(c.sedeId);
         const medico = DB.getMedicoPorId(c.medicoId);
         return `
-        <div class="bg-white rounded-lg shadow-sm p-4">
-          <div class="flex items-center justify-between mb-2">
-            <p class="font-bold text-gray-800">${especialidad ? especialidad.nombre : ""}</p>
-            <span class="text-xs font-semibold px-2 py-1 rounded-full ${estadoColor[c.estado] || ""}">${estadoLabel[c.estado] || c.estado}</span>
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3 border-b border-gray-50 pb-3">
+              <p class="font-bold text-gray-800">${especialidad ? especialidad.nombre : ""}</p>
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-md border ${estadoColor[c.estado] || "bg-gray-100 border-gray-200 text-gray-700"}">${estadoLabel[c.estado] || c.estado}</span>
+            </div>
+            <div class="space-y-2 mb-4">
+              <p class="text-sm text-gray-600 flex items-center gap-2">${iconMedico} ${medico ? medico.nombre : ""}</p>
+              <p class="text-sm text-gray-600 flex items-center gap-2">${iconFecha} ${c.fecha}, ${c.hora}</p>
+              <p class="text-sm text-gray-600 flex items-center gap-2">${iconSede} ${sede ? sede.nombre : ""}</p>
+            </div>
           </div>
-          <p class="text-sm text-gray-500">👨‍⚕️ ${medico ? medico.nombre : ""}</p>
-          <p class="text-sm text-gray-500">📅 ${c.fecha}, ${c.hora}</p>
-          <p class="text-sm text-gray-500 mb-3">🏥 ${sede ? sede.nombre : ""}</p>
           ${
             c.estado !== "cancelada" && c.estado !== "atendida"
-              ? `<button onclick="cancelarCita('${c.id}')" class="w-full border border-red-300 text-red-600 text-sm font-semibold rounded-lg py-2">Cancelar Cita</button>`
+              ? `<button onclick="cancelarCita('${c.id}')" class="w-full border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 transition-colors text-sm font-semibold rounded-lg py-2 mt-auto">Cancelar Cita</button>`
               : ""
           }
         </div>`;
